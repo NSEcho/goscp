@@ -35,6 +35,11 @@ var (
 )
 
 func main() {
+	timeout := flag.Int("t", 5, "timeout for server")
+	shellUrl := flag.String("u", "", "url for the webshell")
+	list := flag.Bool("l", false, "list the history")
+	flag.Parse()
+
 	dir, err := getHomeDir()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Could not get home dir: %+v\n", err)
@@ -45,13 +50,9 @@ func main() {
 
 	db, err := getDB(path)
 	if err != nil {
-		panic(err)
+		fmt.Fprintf(os.Stderr, "Could not initialize database: %+v\n", err)
+		os.Exit(1)
 	}
-
-	timeout := flag.Int("t", 5, "timeout for server")
-	shellUrl := flag.String("u", "", "url for the webshell")
-	list := flag.Bool("l", false, "list the history")
-	flag.Parse()
 
 	if *list {
 		items, err := db.getHistory()
