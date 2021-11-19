@@ -3,6 +3,8 @@
 Set of tools created during my OSCP preparation. They include:
 
 * gosheller - terminal based interface for [cmdasp.aspx](https://github.com/BlackArch/webshells/blob/master/aspx/cmdasp.aspx) webshell. It provides interactive terminal, as well as history savings.
+* gotfp - simple tftp server, once spawned files accessible from the running directory will be available
+
 
 ## gosheller
 
@@ -41,3 +43,18 @@ $ gosheller -l=true
 | 0001-01-01 00:00:00 +0000 UTC | http://127.0.0.1:4167/cmdasp.aspx | hostname | lateralusd |
 +-------------------------------+-----------------------------------+----------+------------+
 ```
+
+## gotfp
+
+```bash
+$ gotftp
+6 bytes received
+```
+
+For test, in another terminal:
+```bash
+$ echo test > bb.txt
+$ tftp 127.0.0.1
+tftp> put bb.txt
+```
+
